@@ -39,20 +39,25 @@ class BinarySearchTree {
     }
   }
 
-  // has(data) {
-  //   // let searchingNode = this.rootNode;
-  //   const checkData = (targetNode, targetData) => {
-  //     if (targetNode.data === data) {
-  //       console.log("Got it! Found the value!");
-  //       return true;
-  //     } else if (targetNode.data > data) {
-  //       checkData(this.left, targetData);
-  //     } else if (targetNode.data < data) {
-  //       checkData(this.right, targetData);
-  //     }
-  //   };
-  //   checkData(this.rootNode, data);
-  // }
+  has(data) {
+    function findNode(node, data) {
+      if (node === null) {
+        return false;
+      }
+
+      if (node.data === data) {
+        return true;
+      }
+
+      if (data < node.data) {
+        return findNode(node.left, data);
+      } else {
+        return findNode(node.right, data);
+      }
+    }
+
+    return findNode(this.rootNode, data);
+  }
 }
 
 const tree1 = new BinarySearchTree();
@@ -67,13 +72,8 @@ tree1.add(17);
 tree1.add(78);
 tree1.add(7);
 tree1.add(14);
-// console.log(tree1);
-// tree1.add(10);
-// console.log(tree1);
-// console.log(tree1.rootNode.right);
-// tree1.add(3);
-// tree1.add(20);
-// console.log(tree1.rootNode.data);
+
+console.log(tree1.has(30));
 
 console.log("\n\nFINAL TREE:\n", tree1);
 

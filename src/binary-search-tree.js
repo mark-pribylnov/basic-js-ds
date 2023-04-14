@@ -39,24 +39,28 @@ class BinarySearchTree {
     }
   }
 
-  has(/* data */) {
-    throw new NotImplementedError("Not implemented");
+  has(data) {
+    function findNode(node, data) {
+      if (node === null) {
+        return false;
+      }
+
+      if (node.data === data) {
+        return true;
+      }
+
+      if (data < node.data) {
+        return findNode(node.left, data);
+      } else {
+        return findNode(node.right, data);
+      }
+    }
+
+    return findNode(this.rootNode, data);
+
+    // throw new NotImplementedError("Not implemented");
     // remove line with error and write your code here
   }
-  // has(data) {
-  //   const checkData = (targetNode, targetData) => {
-  //     // console.log(this);
-  //     if (targetNode.data === data) {
-  //       console.log("Got it! Found the value!");
-  //       return true;
-  //     } else if (targetNode.data > data) {
-  //       checkData(this.left, targetData);
-  //     } else if (targetNode.data < data) {
-  //       checkData(this.right, targetData);
-  //     }
-  //   };
-  //   checkData(this.rootNode, data);
-  // }
 
   find(/* data */) {
     throw new NotImplementedError("Not implemented");
