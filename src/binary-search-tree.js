@@ -18,14 +18,45 @@ class BinarySearchTree {
   }
 
   add(data) {
-    // throw new NotImplementedError("Not implemented");
-    // remove line with error and write your code here
+    this.rootNode = insert(this.rootNode, data);
+
+    function insert(node, value) {
+      if (node === null) {
+        return new Node(value);
+      }
+
+      if (node.data === value) {
+        return node;
+      }
+
+      if (node.data > value) {
+        node.left = insert(node.left, data);
+      } else {
+        node.right = insert(node.right, data);
+      }
+
+      return node;
+    }
   }
 
   has(/* data */) {
     throw new NotImplementedError("Not implemented");
     // remove line with error and write your code here
   }
+  // has(data) {
+  //   const checkData = (targetNode, targetData) => {
+  //     // console.log(this);
+  //     if (targetNode.data === data) {
+  //       console.log("Got it! Found the value!");
+  //       return true;
+  //     } else if (targetNode.data > data) {
+  //       checkData(this.left, targetData);
+  //     } else if (targetNode.data < data) {
+  //       checkData(this.right, targetData);
+  //     }
+  //   };
+  //   checkData(this.rootNode, data);
+  // }
 
   find(/* data */) {
     throw new NotImplementedError("Not implemented");
