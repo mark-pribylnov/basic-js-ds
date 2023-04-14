@@ -17,26 +17,25 @@ class BinarySearchTree {
     return this.rootNode;
   }
 
-  add(data) {
-    this.rootNode = insert(this.rootNode, data);
-
-    function insert(node, value) {
-      if (node === null) {
-        return new Node(value);
-      }
-
-      if (node.data === value) {
-        return node;
-      }
-
-      if (node.data > value) {
-        node.left = insert(node.left, data);
-      } else {
-        node.right = insert(node.right, data);
-      }
-
-      return node;
-    }
+  add(/*data*/) {
+    throw new NotImplementedError("Not implemented");
+    // throw new NotImplementedError("Not implemented");
+    //   this.rootNode = insert(this.rootNode, data);
+    //   function insert(node, value) {
+    //     if (node === null) {
+    //       return new Node(value);
+    //     }
+    //     if (node.data === value) {
+    //       return node;
+    //     }
+    //     if (node.data > value) {
+    //       node.left = insert(node.left, data);
+    //     } else {
+    //       node.right = insert(node.right, data);
+    //     }
+    //     return node;
+    //   }
+    // }
   }
 
   has(/*data*/) {
