@@ -25,7 +25,12 @@ const { ListNode } = require("../extensions/list-node.js");
 function removeKFromList(l, k) {
   // throw new NotImplementedError("Not implemented");
   // remove line with error and write your code here
-  let currentNode = l.head;
+  let currentNode = l;
+  if (currentNode.value === k) {
+    currentNode.value = currentNode.next.value;
+    currentNode.next = currentNode.next.next;
+  }
+
   while (currentNode.next) {
     if (currentNode.next.value === k) {
       currentNode.next = currentNode.next.next;
@@ -34,10 +39,7 @@ function removeKFromList(l, k) {
       currentNode = currentNode.next;
     }
   }
-  console.log(l);
-  console.log(
-    "-----------\n-----------\n-----------\n-----------\n-----------\n-----------\n-----------\n-----------\n-----------\n-----------\n-----------\n-----------\n-----------\n-----------"
-  );
+  // console.log(l);
   return l;
 }
 

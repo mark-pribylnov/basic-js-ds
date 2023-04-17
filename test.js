@@ -1,50 +1,29 @@
 "use strict";
 
-class ListNode {
-  constructor(value) {
-    this.value = value;
-    this.next = null;
-  }
-}
+const { testOptional, ListNode } = require("./extensions/index.js");
 
-class LinkedList {
-  constructor(head = null) {
-    this.head = head;
-    this.length = 0;
-  }
-
-  add(value) {
-    let newNode = new ListNode(value);
-
-    if (!this.head) {
-      this.head = newNode;
-      this.length++;
-    } else {
-      let currentNode = this.head; //start at the head
-
-      while (currentNode.next) {
-        currentNode = currentNode.next;
-      }
-
-      currentNode.next = newNode;
+function convertArrayToList(arr) {
+  return arr.reverse().reduce((acc, cur) => {
+    if (acc) {
+      const node = new ListNode(cur);
+      node.next = acc;
+      return node;
     }
 
-    // console.log(`\nAdded ${value}. Current state:\n`, this);
-    this.length++;
-  }
-
-  print() {
-    let currentNode = this.head;
-
-    while (currentNode) {
-      console.log(currentNode.value);
-      currentNode = currentNode.next;
-    }
-  }
+    return new ListNode(cur);
+  }, null);
 }
+
+const initial = convertArrayToList([1, 2, 3, 3, 4, 5]);
+// console.log(initial);
 
 function remove(l, k) {
-  let currentNode = l.head;
+  let currentNode = l;
+  if (currentNode.value === k) {
+    currentNode.value = currentNode.next.value;
+    currentNode.next = currentNode.next.next;
+  }
+
   while (currentNode.next) {
     if (currentNode.next.value === k) {
       currentNode.next = currentNode.next.next;
@@ -53,16 +32,19 @@ function remove(l, k) {
       currentNode = currentNode.next;
     }
   }
-  console.log(l);
+  // console.log(l);
   return l;
 }
 
-const list = new LinkedList();
+function print() {
+  let currentNode = initial;
 
-list.add(1);
-list.add(2);
-list.add(3);
+  while (currentNode) {
+    console.log(currentNode.value);
+    currentNode = currentNode.next;
+  }
+}
 
-remove(list, 3);
-// console.log(list.head);
-// list.print();
+remove(initial, 3); // [1, 2, 3, 3, 4, 5] ==> [1, 2, 4, 5]
+print();
+// console.log(initial.next.value);
