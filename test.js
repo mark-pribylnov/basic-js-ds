@@ -1,40 +1,142 @@
 "use strict";
 
-class Stack {
+// class ListNode {
+//   constructor(value) {
+//     this.value = value;
+//     this.next = null;
+//   }
+// }
+
+// class LinkedList {
+//   constructor(head = null) {
+//     this.head = head;
+//     this.length = 0;
+//   }
+
+//   add(value) {
+//     let newNode = new ListNode(value);
+
+//     if (!this.head) {
+//       this.head = newNode;
+//       this.length++;
+//     } else {
+//       let currentNode = this.head; //start at the head
+
+//       while (currentNode.next) {
+//         currentNode = currentNode.next;
+//       }
+
+//       currentNode.next = newNode;
+//     }
+
+//     // console.log(`\nAdded ${value}. Current state:\n`, this);
+//     this.length++;
+//   }
+
+//   remove(value) {
+//     let currentNode = this.head;
+//     let prevNode;
+//     if (currentNode.value === value) {
+//       this.head = currentNode.next;
+//     } // if the value we want to remove is head, just move the pointer to the element after the head
+//     else {
+//       while (currentNode.value !== value) {
+//         prevNode = currentNode;
+//         currentNode = currentNode.next;
+//       }
+//       prevNode.next = currentNode.next;
+//     }
+//     this.length--;
+//   }
+
+//   print() {
+//     let currentNode = this.head;
+
+//     while (currentNode) {
+//       console.log(currentNode.value);
+//       currentNode = currentNode.next;
+//     }
+//   }
+// }
+
+// const list = new LinkedList();
+
+// for (let i = 0; i < 5; i++) {
+//   let randomValue = Math.floor(Math.random() * 10);
+//   list.add(randomValue);
+// }
+// list.add(1);
+// list.add(2);
+// list.add(3);
+// list.add(4);
+
+// // list.remove(3);
+// list.print();
+
+const { ListNode } = require("./extensions");
+
+class Queue {
   constructor() {
-    this.items = [];
-    this.size = 0;
+    this.head = null;
+    this.tail = null;
+    this.length = 0;
   }
 
-  push(element) {
-    this.items.push(element);
-    this.size++;
-    console.log(`\nAdd ${element}:`, this);
+  enqueue(value) {
+    // throw new NotImplementedError("Not implemented");
+    // remove line with error and write your code here
+
+    const newNode = new ListNode(value);
+
+    if (!this.head) {
+      this.head = newNode;
+      this.tail = newNode;
+    } else {
+      let currentNode = this.head; //start at the head
+
+      while (currentNode.next) {
+        currentNode = currentNode.next;
+      }
+
+      currentNode.next = newNode;
+
+      this.tail = currentNode.next;
+    }
+    this.length++;
   }
 
-  pop() {
-    const deletedItem = this.items[this.items.length - 1];
-    if (this.items.length === 0) return undefined;
-    this.items.pop();
-    this.size--;
-    console.log(`Delete ${deletedItem}. Now:`, this);
-    return deletedItem;
+  dequeue() {
+    const deletedValue = this.head.value;
+    this.head = this.head.next;
+    this.length--;
+    return deletedValue;
   }
 
-  peek() {
-    console.log(this.items[this.items.length - 1]);
-    return this.items[this.items.length - 1];
+  getUnderlyingList() {
+    return this;
+  }
+
+  print() {
+    let currentNode = this.head;
+
+    while (currentNode) {
+      console.log(currentNode.value);
+      currentNode = currentNode.next;
+    }
+
+    console.log("Head:\n", this.head);
+    console.log("Tail:\n", this.tail);
   }
 }
 
-const stack = new Stack();
+const q = new Queue();
 
-stack.push(5);
-stack.push(6);
-stack.push(7);
-stack.peek();
-stack.pop();
-stack.peek();
-//  assert.strictEqual(stack.peek(), 7);
-//  assert.strictEqual(stack.pop(), 7);
-//  assert.strictEqual(stack.peek(), 6);
+q.enqueue(2);
+q.enqueue(8);
+q.enqueue(5);
+q.enqueue(87);
+q.enqueue(7);
+q.dequeue();
+q.dequeue();
+// q.print();
+console.log(q.getUnderlyingList());
