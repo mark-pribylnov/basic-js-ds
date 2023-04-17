@@ -1,80 +1,40 @@
 "use strict";
 
-class Node {
-  constructor(data) {
-    this.data = data;
-    this.left = null;
-    this.right = null;
-  }
-}
-
-class BinarySearchTree {
+class Stack {
   constructor() {
-    this.rootNode = null;
+    this.items = [];
+    this.size = 0;
   }
 
-  root() {
-    return this.rootNode;
+  push(element) {
+    this.items.push(element);
+    this.size++;
+    console.log(`\nAdd ${element}:`, this);
   }
 
-  add(data) {
-    this.rootNode = insert(this.rootNode, data);
-
-    function insert(node, value) {
-      if (node === null) {
-        return new Node(value);
-      }
-
-      if (node.data === value) {
-        return node;
-      }
-
-      if (node.data > value) {
-        node.left = insert(node.left, data);
-      } else {
-        node.right = insert(node.right, data);
-      }
-
-      return node;
-    }
+  pop() {
+    const deletedItem = this.items[this.items.length - 1];
+    if (this.items.length === 0) return undefined;
+    this.items.pop();
+    this.size--;
+    console.log(`Delete ${deletedItem}. Now:`, this);
+    return deletedItem;
   }
 
-  has(data) {
-    function findNode(node, data) {
-      if (node === null) {
-        return false;
-      }
-
-      if (node.data === data) {
-        return true;
-      }
-
-      if (data < node.data) {
-        return findNode(node.left, data);
-      } else {
-        return findNode(node.right, data);
-      }
-    }
-
-    return findNode(this.rootNode, data);
+  peek() {
+    console.log(this.items[this.items.length - 1]);
+    return this.items[this.items.length - 1];
   }
 }
 
-const tree1 = new BinarySearchTree();
+const stack = new Stack();
 
-tree1.add(30);
-tree1.add(45);
-tree1.add(57);
-tree1.add(35);
-tree1.add(13);
-tree1.add(36);
-tree1.add(17);
-tree1.add(78);
-tree1.add(7);
-tree1.add(14);
-
-console.log(tree1.has(30));
-
-console.log("\n\nFINAL TREE:\n", tree1);
-
-// tree1.has(10);
+stack.push(5);
+stack.push(6);
+stack.push(7);
+stack.peek();
+stack.pop();
+stack.peek();
+//  assert.strictEqual(stack.peek(), 7);
+//  assert.strictEqual(stack.pop(), 7);
+//  assert.strictEqual(stack.peek(), 6);
