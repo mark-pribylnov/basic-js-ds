@@ -1,6 +1,8 @@
 const { NotImplementedError } = require("../lib/errors");
 const { ListNode } = require("../extensions/list-node.js");
 
+// Tutorial: https://www.youtube.com/watch?v=bK7I79hcm08
+
 /**
  * Implement the Queue with a given interface via linked list (use ListNode extension above).
  *
@@ -50,9 +52,11 @@ class Queue {
   dequeue() {
     // throw new NotImplementedError("Not implemented");
     // remove line with error and write your code here
+    if (!this.head) return undefined;
 
     const deletedValue = this.head.value;
     this.head = this.head.next;
+    this.tail = null;
     this.length--;
     return deletedValue;
   }
@@ -61,3 +65,10 @@ class Queue {
 module.exports = {
   Queue,
 };
+
+// const q = new Queue();
+// q.enqueue(1);
+// q.enqueue(3);
+// q.dequeue();
+
+// console.log(q.getUnderlyingList());
